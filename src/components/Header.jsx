@@ -1,0 +1,44 @@
+import { useDispatch, useSelector } from "react-redux";
+import { logo, menuIcon } from "../utils/constants";
+import MicComponent from "./MicComponent";
+import MoreApps from "./MoreApps";
+import NewVideo from "./NewVideo";
+import SearchBar from "./SearchBar";
+import UserComponent from "./UserComponent";
+import { changeSidebarState } from "../utils/globalStateSlice";
+
+const Header = () => {
+  const sidebarState = useSelector((store) => store?.globalSlice?.globalState);
+  const dispatch = useDispatch();
+  const setSidebarState = (e) => {
+    e.preventDefault();
+    dispatch(changeSidebarState(!sidebarState?.isSidebarOpen));
+  };
+  return (
+    <nav className="header">
+      <a href="" onClick={(e) => setSidebarState(e)}>
+        <img src={menuIcon} alt="menu-icon" height={"22px"} width={"22px"} />
+      </a>
+      <div className="logo-searchbar">
+        <img
+          className="logo"
+          src={logo}
+          width={"120px"}
+          height={"40px"}
+          alt="logo"
+        />
+        <div className="search-voice-container">
+          <SearchBar />
+          <MicComponent />
+        </div>
+      </div>
+      <div className="right-header-container">
+        <MoreApps />
+        <NewVideo />
+        <UserComponent />
+      </div>
+    </nav>
+  );
+};
+
+export default Header;

@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* HEADER*/
+.header {
+  @apply flex justify-between items-center mx-1.5 my-1;
+}
+.logo-searchbar {
+  @apply flex flex-1;
+}
+.logo {
+  @apply mx-4;
+}
+.search-voice-container {
+  @apply flex items-center flex-1 sm:justify-end;
+}
+.searchbar-container {
+  @apply flex border border-gray-200 rounded-3xl m-2 p-1 items-center max-w-lg justify-between flex-1 sm:hidden;
+}
+.search-input {
+  @apply border-none focus:outline-none w-10/12 m-1;
+}
+.search-btn {
+  @apply bg-gray-200 rounded-2xl p-2;
+}
+.mic-container {
+  @apply bg-black rounded-full p-2;
+}
+.more-apps {
+  @apply bg-gray-200 rounded-full p-3;
+}
+.right-header-container {
+  @apply flex items-center;
+}
+.new-video-container {
+  @apply bg-black text-white rounded-[2.5rem] flex items-center my-1 mx-2 px-3.5 py-1;
+}
+.new-video-container img {
+  @apply mx-2.5 my-1.5;
+}
+.user-container {
+  @apply rounded-full;
+}
+
+/*  SIDEBAR  */
+
+.sidebar-container {
+  @apply max-w-[240px] max-h-[80vh];
+}
+.sidebar-button-container {
+  @apply flex mx-2 hover:bg-[#f2f2f2] p-3 rounded-md font-light text-black opacity-90 items-center lg:flex-col lg:text-xs lg:w-[70%] lg:px-2 lg:text-center;
+}
+/* .sidebar-button-container span {
+  @apply lg:hidden;
+} */
+.sidebar-icon {
+  @apply h-6 w-6 mx-2;
+}
+.icon-none {
+  @apply hidden;
+}
+.active .for-active {
+  width: 10px;
+  height: 10px;
+  border-radius: 40px;
+  background-color: red;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 639px) {
+  .searchbar-mobile-btn {
+    display: none;
+  }
+}
