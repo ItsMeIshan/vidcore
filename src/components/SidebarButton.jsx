@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 function SidebarButton(props) {
   const globalState = useSelector((store) => store?.globalSlice?.globalState);
-  console.log(props?.toBeHidden === undefined && globalState?.isSidebarOpen);
   return (
     <>
       {props.route ? (

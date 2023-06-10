@@ -8,6 +8,9 @@ import {
   ScissorsIcon,
   VideoCameraIcon,
 } from "@heroicons/react/24/outline";
+import { API_KEY } from "../../api_constant";
+
+export const POPULAR_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${API_KEY}`;
 
 export const micIcon = "/mic-icon-white.svg";
 export const newVideo = "/reel-icon.svg";
