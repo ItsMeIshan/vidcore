@@ -1,4 +1,4 @@
-import { userIcon } from "../utils/constants";
+import { userIcon } from "../../utils/constants";
 
 function UserComponent() {
   return (

@@ -1,4 +1,4 @@
-import { micIcon } from "../utils/constants";
+import { micIcon } from "../../utils/constants";
 
 function MicComponent() {
   return (

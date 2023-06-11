@@ -59,3 +59,21 @@ export function getNextPgURL(token, urlType = "POPULAR_VIDEOS") {
     return POPULAR_VIDEOS_NEXT_PG;
   }
 }
+
+export function numberCountFormat(count) {
+  if (count < Math.pow(10, 2)) {
+    return count;
+  }
+  //for 'k'
+  if (count < Math.pow(10, 5)) {
+    return (count / 1000).toFixed(1) + "k";
+  }
+  //for 'M'
+  if (count >= Math.pow(10, 5) && count < Math.pow(10, 8)) {
+    return (count / 1000000).toFixed(1) + "M";
+  }
+  //for 'B'
+  if (count >= Math.pow(10, 8)) {
+    return (count / 1000000000).toFixed(1) + "B";
+  }
+}

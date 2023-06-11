@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Header from "./navbar/Header";
+import Sidebar from "../components/sidebar/Sidebar";
 /* Planning
  - Header
     - hamburger menu Icon

@@ -1,4 +1,4 @@
-import { searchIcon } from "../utils/constants";
+import { searchIcon } from "../../utils/constants";
 
 const SearchBar = () => {
   return (

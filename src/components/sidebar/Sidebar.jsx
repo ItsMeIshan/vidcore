@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { sidebarConfig } from "../utils/constants";
+import { sidebarConfig } from "../../utils/constants";
 import SidebarButton from "./SidebarButton";
 import { useLayoutEffect } from "react";
 import {
   changeSidebarState,
   changeWindowSize,
-} from "../utils/globalStateSlice";
+} from "../../utils/globalStateSlice";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Sidebar = () => {
   const sidebarState = useSelector((store) => store?.globalSlice?.globalState);
   return (
     <div
-      className={`sidebar-container ${
+      className={`sidebar-container sticky top-[8%] ${
         sidebarState?.isSidebarOpen ? "" : "hidden"
       }`}
     >

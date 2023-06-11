@@ -1,4 +1,4 @@
-import { moreApps } from "../utils/constants";
+import { moreApps } from "../../utils/constants";
 
 function MoreApps() {
   return (
