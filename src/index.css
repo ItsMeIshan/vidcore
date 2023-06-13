@@ -10,10 +10,13 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+h3 {
+  @apply text-lg;
+}
 
 /* HEADER*/
 .header {
-  @apply flex justify-between items-center mx-1.5 my-1;
+  @apply flex justify-between items-center px-1.5 py-1;
 }
 .logo-searchbar {
   @apply flex flex-1 items-center;
@@ -141,6 +144,34 @@ body {
   @apply w-1/4;
 }
 
+/* SUGGESTED VIDEO CARD */
+.suggested-video-card-container {
+  /* @apply  */
+  min-height: 20vh;
+}
+
+/* Video Info */
+.video-info-container {
+  @apply ml-3 mt-3 mb-3 flex justify-between items-center;
+}
+.title-views {
+  @apply flex-grow-[2];
+}
+.title-views span {
+  @apply text-sm text-[#606060];
+}
+.control-section {
+  @apply flex flex-grow-[1] justify-evenly items-center;
+}
+.control-btn {
+  @apply flex flex-col items-center bg-[#f2f2f2] rounded-2xl p-2 hover:bg-[#dedede];
+}
+.control-btn span {
+  @apply text-xs;
+}
+.like-dislike-btn {
+  @apply bg-[#f2f2f2] p-2 hover:bg-[#dedede] rounded-2xl;
+}
 /* MEDIA QUERIES */
 @media (min-width: 639px) {
   .searchbar-mobile-btn {

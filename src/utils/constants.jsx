@@ -11,7 +11,9 @@ import {
 import { API_KEY } from "../../api_constant";
 
 export const POPULAR_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${API_KEY}`;
-
+export const SUGGESTED_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&key=${API_KEY}`;
+export const VIDEO_INFO_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=${API_KEY}`;
+export const CHANNEL_INFO_API_URL = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=${API_KEY}`;
 export const micIcon = "/mic-icon-white.svg";
 export const newVideo = "/reel-icon.svg";
 export const moreApps = "/more-apps.svg";

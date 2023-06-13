@@ -4,12 +4,43 @@ import {
   numberCountFormat,
   youtubeDurationToUseful,
 } from "../utils/utilityFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetVideoData,
+  setCurrentVid,
+  setPreviousVid,
+} from "../utils/videoSlice";
 
 const VideoCard = (props) => {
   let dateStr = new Date(props?.snippet?.publishedAt);
+  const dispatch = useDispatch();
+  const selectedVideoState = useSelector(
+    (store) => store.videoSlice.selectedVideoState
+  );
+  const handleClick = () => {
+    if (
+      selectedVideoState.previous != selectedVideoState.current ||
+      (selectedVideoState.previous == "" && selectedVideoState.current == "")
+    ) {
+      if (
+        selectedVideoState.previous == "" &&
+        selectedVideoState.current == ""
+      ) {
+        dispatch(setPreviousVid(selectedVideoState.current));
+        dispatch(setCurrentVid(props?.id));
+      } else {
+        dispatch(resetVideoData());
+        dispatch(setPreviousVid(selectedVideoState.current));
+        dispatch(setCurrentVid(props?.id));
+      }
+    }
+  };
   return (
-    // <Link to={`/video/${props?.id}`}>
-    <Link className="video-card-wrapper" to={`/video/${props?.id}`}>
+    <Link
+      className="video-card-wrapper"
+      to={`/video/${props?.id}`}
+      onClick={handleClick}
+    >
       <div className="video-card border m-1">
         <div className="channel-duration-container">
           <div
@@ -35,7 +66,6 @@ const VideoCard = (props) => {
         </div>
       </div>
     </Link>
-    // </Link>
   );
 };
 

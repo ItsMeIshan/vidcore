@@ -1,4 +1,9 @@
-import { POPULAR_VIDEOS_API_URL } from "./constants";
+import {
+  CHANNEL_INFO_API_URL,
+  POPULAR_VIDEOS_API_URL,
+  SUGGESTED_VIDEOS_API_URL,
+  VIDEO_INFO_API_URL,
+} from "./constants";
 
 export function youtubeDurationToUseful(duration) {
   var hours = 0;
@@ -53,11 +58,28 @@ export function youtubeDurationToUseful(duration) {
   return str;
 }
 
-export function getNextPgURL(token, urlType = "POPULAR_VIDEOS") {
+export function getNextPgURL(token = "", urlType = "POPULAR_VIDEOS") {
   if (urlType == "POPULAR_VIDEOS") {
     const POPULAR_VIDEOS_NEXT_PG = `${POPULAR_VIDEOS_API_URL}&pageToken=${token}`;
     return POPULAR_VIDEOS_NEXT_PG;
   }
+}
+export function getRelatedVideoURL(token = "", vidId = "") {
+  if (token != "") {
+    const SUGGESTED_VIDEOS_NEXT_PG = `${SUGGESTED_VIDEOS_API_URL}&relatedToVideoId=${vidId}&pageToken=${token}`;
+    return SUGGESTED_VIDEOS_NEXT_PG;
+  } else if (token == "" && vidId != "") {
+    const SUGGESTED_VIDEOS_URL = `${SUGGESTED_VIDEOS_API_URL}&relatedToVideoId=${vidId}`;
+    return SUGGESTED_VIDEOS_URL;
+  }
+  return "-1";
+}
+export function getVideoInfoURL(id) {
+  return `${VIDEO_INFO_API_URL}&id=${id}`;
+}
+
+export function getChannelInfoURL(id) {
+  return `${CHANNEL_INFO_API_URL}&id=${id}`;
 }
 
 export function numberCountFormat(count) {
