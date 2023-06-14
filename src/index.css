@@ -172,6 +172,36 @@ h3 {
 .like-dislike-btn {
   @apply bg-[#f2f2f2] p-2 hover:bg-[#dedede] rounded-2xl;
 }
+
+/* Channel Hero */
+.channel-hero {
+  @apply flex items-center;
+}
+.channel-stats span {
+  @apply mr-2;
+}
+.channel-hero img {
+  @apply rounded-full;
+}
+.channel-description {
+  @apply border-b-2 border-[#d0d7de] py-2 my-2;
+}
+.stats-container {
+  @apply flex flex-col w-1/2;
+}
+.stats-container span {
+  @apply border-b-2 border-[#d0d7de] py-2;
+}
+.stats-icon {
+  @apply hover:bg-[#5050503b] p-2 rounded-full;
+}
+
+/*Search Styles*/
+
+.search-tile {
+  @apply p-2;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 639px) {
   .searchbar-mobile-btn {

@@ -18,7 +18,11 @@ function VideoInfo(props) {
       <div className="video-info-container">
         <div className="title-views">
           <h3>{props?.snippet?.title}</h3>
-          <span>{numberCountFormat(props?.statistics?.viewCount)}</span>
+          <span>
+            {props?.statistics?.viewCount
+              ? `${numberCountFormat(props?.statistics?.viewCount)} views`
+              : ""}
+          </span>
         </div>
         <div className="control-section">
           <div className=" like-dislike-btn">

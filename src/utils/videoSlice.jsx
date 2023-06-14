@@ -15,6 +15,11 @@ const videoSlice = createSlice({
       suggestedVideoList: [],
       nextPgToken: "",
     },
+    searchVideoState: {
+      searchString: "",
+      searchList: [],
+      nextPgToken: "",
+    },
   },
   reducers: {
     addVideosList: (state, action) => {
@@ -46,6 +51,17 @@ const videoSlice = createSlice({
     setCurrentVid: (state, action) => {
       state.selectedVideoState.current = action.payload;
     },
+    addSearchResults: (state, action) => {
+      console.log("Adding....");
+      state.searchVideoState.searchList = action.payload;
+    },
+    setSearchString: (state, action) => {
+      state.searchVideoState.searchString = action.payload;
+    },
+    clearSuggestions: (state, action) => {
+      console.log(action);
+      state.searchVideoState.searchList = [];
+    },
   },
 });
 export const {
@@ -56,5 +72,8 @@ export const {
   resetVideoData,
   setPreviousVid,
   setCurrentVid,
+  addSearchResults,
+  setSearchString,
+  clearSuggestions,
 } = videoSlice.actions;
 export default videoSlice.reducer;

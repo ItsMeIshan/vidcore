@@ -3,20 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeSidebarState } from "../../utils/globalStateSlice";
 import { useParams } from "react-router-dom";
 import {
-  getRelatedVideoURL,
+  getChannelInfoURL,
   getVideoInfoURL,
 } from "../../utils/utilityFunctions";
 import SuggestedVideoCard from "../SuggestedVideoCard";
-import {
-  addSuggestedVideosToList,
-  setNextSuggestedPageToken,
-} from "../../utils/videoSlice";
 import VideoInfo from "./video/VideoInfo";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@uidotdev/usehooks";
+import ChannelInfo from "./video/ChannelInfo";
 
 const VideoPreview = () => {
   const [vidInfo, setVidInfo] = useState(null);
+  const [channelInfo, setChannelInfo] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const suggestedVideoState = useSelector(
     (store) => store.videoSlice.suggestedVideoState
@@ -30,20 +28,31 @@ const VideoPreview = () => {
         console.log(json);
         const old = structuredClone(vidInfo);
         setVidInfo({ ...old, ...json });
+        fetchChannelInfo(json?.items[0]?.snippet?.channelId);
+      });
+  };
+  const fetchChannelInfo = (id) => {
+    fetch(getChannelInfoURL(id))
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        const old = structuredClone(channelInfo);
+        setChannelInfo({ ...old, ...json });
       });
   };
   useEffect(() => {
     dispatch(changeSidebarState(false));
     vidParams.id != undefined && suggestedVideoState?.nextPgToken == ""
-      ? fetch(getRelatedVideoURL("", vidParams.id))
-          .then((response) => response.json())
-          .then((json) => {
-            dispatch(addSuggestedVideosToList(json?.items));
-            dispatch(setNextSuggestedPageToken(json.nextPageToken));
-            fetchVideoInfo(vidParams?.id);
-          })
-      : console.log("NO API CALL");
-  });
+      ? fetchVideoInfo(vidParams?.id)
+      : // fetch(getRelatedVideoURL("", vidParams.id))
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //       dispatch(addSuggestedVideosToList(json?.items));
+        //       dispatch(setNextSuggestedPageToken(json.nextPageToken));
+        //       fetchVideoInfo(vidParams?.id);
+        //     })
+        console.log("NO API CALL");
+  }, [vidParams?.id]);
 
   const { width, height } = useWindowSize();
   return (
@@ -73,7 +82,13 @@ const VideoPreview = () => {
                   })
                 : console.log("NOTHING HAPPENED")}
             </div>
-            <div className="about-channel">channel name...</div>
+            <div className="about-channel">
+              {channelInfo
+                ? channelInfo?.items.map((item, idx) => {
+                    return <ChannelInfo key={idx} {...item} />;
+                  })
+                : ""}
+            </div>
           </div>
         </div>
         <div className="suggested-videos-container">
