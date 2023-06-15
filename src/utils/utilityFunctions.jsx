@@ -1,6 +1,7 @@
 import {
   CHANNEL_INFO_API_URL,
   POPULAR_VIDEOS_API_URL,
+  SEARCH_URL,
   SUGGESTED_VIDEOS_API_URL,
   VIDEO_INFO_API_URL,
 } from "./constants";
@@ -81,7 +82,12 @@ export function getVideoInfoURL(id) {
 export function getChannelInfoURL(id) {
   return `${CHANNEL_INFO_API_URL}&id=${id}`;
 }
-
+export function getSearchURL(query, token = "") {
+  if (token == "") {
+    return `${SEARCH_URL}&q=${query}`;
+  }
+  return `${SEARCH_URL}&q=${query}&pageToken=${token}`;
+}
 export function numberCountFormat(count) {
   if (count < Math.pow(10, 2)) {
     return count;

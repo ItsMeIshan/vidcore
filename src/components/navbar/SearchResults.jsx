@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import SearchResultTile from "./SearchResultTile";
 
-function SearchResults() {
+function SearchResults(props) {
   const searchState = useSelector(
     (store) => store?.videoSlice?.searchVideoState
   );
@@ -9,11 +9,16 @@ function SearchResults() {
     <>
       <div
         className={`w-full bg-white flex flex-col z-30 absolute top-[90%] ${
-          searchState.searchString === "" ? "hidden" : ""
+          !props?.focus ? "hidden" : ""
         }`}
       >
-        {searchState.searchList.length > 0
-          ? searchState.searchList.map((item, idx) => {
+        {searchState?.searchString == "" && props?.focus ? (
+          <span className="text-center p-4">Type Something...</span>
+        ) : (
+          ""
+        )}
+        {searchState?.searchList?.length > 0
+          ? searchState?.searchList?.map((item, idx) => {
               // console.log(item);
               return <SearchResultTile key={idx} item={item} />;
             })

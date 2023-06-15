@@ -7,8 +7,11 @@ import {
 } from "../../utils/videoSlice";
 import SearchResults from "./SearchResults";
 import { useCustomDebounce } from "../../utils/debounce";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
+  const [focus, setFocus] = useState(false);
   const dispatch = useDispatch();
   const searchVideoState = useSelector(
     (store) => store.videoSlice.searchVideoState
@@ -34,7 +37,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="flex flex-col relative">
+      <div className="flex flex-col relative max-w-lg flex-1">
         <div className="searchbar-container">
           <input
             className="search-input"
@@ -44,12 +47,34 @@ const SearchBar = () => {
             id=""
             value={searchVideoState.searchString}
             onChange={setSearchQuery}
+            onFocus={(e) => {
+              console.log(e);
+              setFocus(true);
+            }}
+            onBlur={() => {
+              setTimeout(() => {
+                setFocus(false);
+              }, 100);
+            }}
           />
-          <div className="search-btn">
-            <img src={searchIcon} width={"18px"} height={"18px"} alt="" />
-          </div>
+          {searchVideoState?.searchString == "" ? (
+            <div className="search-btn search-btn-disabled">
+              <img src={searchIcon} width={"18px"} height={"18px"} alt="" />
+            </div>
+          ) : (
+            <Link
+              to={`/search?q=${searchVideoState?.searchString.replaceAll(
+                " ",
+                "+"
+              )}`}
+            >
+              <div className="search-btn">
+                <img src={searchIcon} width={"18px"} height={"18px"} alt="" />
+              </div>
+            </Link>
+          )}
         </div>
-        <SearchResults />
+        <SearchResults focus={focus} />
       </div>
       <div className="searchbar-mobile-btn">
         <div className="search-btn">
