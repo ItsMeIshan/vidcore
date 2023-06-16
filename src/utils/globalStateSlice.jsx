@@ -6,6 +6,7 @@ const globalSlice = createSlice({
     globalState: {
       isSidebarOpen: true,
       screenSize: 1400,
+      mobileSearchBar: false,
     },
   },
   reducers: {
@@ -15,7 +16,14 @@ const globalSlice = createSlice({
     changeWindowSize: (state, action) => {
       state.globalState.screenSize = action.payload;
     },
+    changeMobileSearchBarState: (state, action) => {
+      state.globalState.mobileSearchBar = action.payload;
+    },
   },
 });
-export const { changeSidebarState, changeWindowSize } = globalSlice.actions;
+export const {
+  changeSidebarState,
+  changeWindowSize,
+  changeMobileSearchBarState,
+} = globalSlice.actions;
 export default globalSlice.reducer;

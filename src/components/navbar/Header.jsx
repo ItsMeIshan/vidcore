@@ -17,24 +17,38 @@ const Header = () => {
   };
   return (
     <nav className="header sticky top-0 z-20 bg-white">
-      <a href="" onClick={(e) => setSidebarState(e)}>
-        <img src={menuIcon} alt="menu-icon" height={"22px"} width={"22px"} />
-      </a>
-      <div className="logo-searchbar">
-        <Link className="logo" to="/">
-          <img src={logo} width={"120px"} height={"40px"} alt="logo" />
-        </Link>
-        <div className="search-voice-container">
-          <SearchBar />
-          <MicComponent />
-        </div>
-      </div>
+      {!sidebarState?.mobileSearchBar ? (
+        <a href="" onClick={(e) => setSidebarState(e)}>
+          <img src={menuIcon} alt="menu-icon" height={"22px"} width={"22px"} />
+        </a>
+      ) : (
+        ""
+      )}
 
-      <div className="right-header-container">
-        <MoreApps />
-        <NewVideo />
-        <UserComponent />
-      </div>
+      {!sidebarState?.mobileSearchBar ? (
+        <div className="logo-searchbar">
+          <Link className="logo" to="/">
+            <img src={logo} width={"120px"} height={"40px"} alt="logo" />
+          </Link>
+          <div className="search-voice-container">
+            <SearchBar />
+            <MicComponent />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {sidebarState?.mobileSearchBar ? <SearchBar /> : ""}
+      {!sidebarState?.mobileSearchBar ? (
+        <div className="right-header-container">
+          <MoreApps />
+          <NewVideo />
+          <UserComponent />
+        </div>
+      ) : (
+        ""
+      )}
     </nav>
   );
 };

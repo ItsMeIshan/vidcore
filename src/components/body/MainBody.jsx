@@ -40,7 +40,7 @@ const MainBody = () => {
   }, []);
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <TopicsComponent />
         <div className="main-body-container">
           <InfiniteScroll

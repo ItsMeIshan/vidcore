@@ -6,10 +6,12 @@ import {
   changeSidebarState,
   changeWindowSize,
 } from "../../utils/globalStateSlice";
+// import { useWindowSize } from "@uidotdev/usehooks";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const dispatch = useDispatch();
   const globalState = useSelector((store) => store?.globalSlice?.globalState);
+  // const { width, height } = useWindowSize();
   const updateWindowSize = () => {
     dispatch(changeWindowSize(window.innerWidth));
     if (globalState?.screenSize < 639) {
@@ -25,9 +27,9 @@ const Sidebar = () => {
   const sidebarState = useSelector((store) => store?.globalSlice?.globalState);
   return (
     <div
-      className={`sidebar-container sticky top-[8%] ${
-        sidebarState?.isSidebarOpen ? "" : "hidden"
-      }`}
+      className={`sidebar-container ${
+        props.desktopSidebar ? "sm:hidden" : ""
+      } ${sidebarState?.isSidebarOpen ? "" : "hidden"}`}
     >
       {sidebarConfig.map((data, idx) => {
         return <SidebarButton key={idx} {...data} />;
