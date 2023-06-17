@@ -67,9 +67,9 @@ h3 {
   @apply rounded-full;
 }
 
-.sidebar-outlet-container {
+/* .sidebar-outlet-container {
   @apply sm:relative;
-}
+} */
 
 /*  SIDEBAR  */
 
@@ -103,7 +103,7 @@ h3 {
 
 /* Video List */
 .main-body-container {
-  @apply bg-[#f1f1f1] rounded-lg z-10 pt-1 w-[100%];
+  @apply bg-[#f1f1f1] rounded-lg z-10 pt-1 w-[100%] sm:bg-transparent;
 }
 .popular-videos-container {
   @apply flex flex-wrap min-h-screen justify-center;
@@ -221,16 +221,16 @@ h3 {
 
 /* Search Page */
 .search-videos-container {
-  @apply max-w-5xl;
+  @apply max-w-5xl flex flex-col items-center;
 }
 .search-card-container {
-  @apply flex justify-evenly items-center max-h-[30vh] mb-4 hover:bg-[#f2f2f2];
+  @apply flex justify-evenly items-center min-h-[30vh] mb-4 hover:bg-[#f2f2f2] sm:flex-col sm:items-center;
 }
 .search-card-info {
   @apply flex flex-col text-[#606060];
 }
 .search-card-info h3 {
-  @apply text-black text-xl;
+  @apply text-black text-xl sm:text-lg;
 }
 .search-card-channel {
   @apply flex items-center my-2;
@@ -240,6 +240,9 @@ h3 {
 }
 .search-card-thumbnail {
   @apply rounded-lg object-cover;
+}
+.thumbnail-container {
+  @apply sm:flex sm:justify-center;
 }
 
 /* MEDIA QUERIES */
@@ -279,5 +282,14 @@ h3 {
   }
   .searchbar-mobile-btn {
     @apply mr-1;
+  }
+  .search-card-info {
+    @apply w-full;
+  }
+  .search-card-info h3 {
+    @apply text-base;
+  }
+  .search-result-card-description {
+    @apply hidden;
   }
 }

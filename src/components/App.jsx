@@ -31,6 +31,7 @@ function App() {
     content: {
       top: "8%",
       position: "absolute",
+      zIndex: "10",
       // left: '50%',
       // right: 'auto',
       // bottom: 'auto',
@@ -62,10 +63,16 @@ function App() {
 
       <div
         style={{ display: "flex" }}
-        className="sidebar-outlet-container sm:-z-10"
+        className={`sidebar-outlet-container ${
+          globalState?.isSidebarOpen ? "relative" : ""
+        }`}
       >
         <Sidebar desktopSidebar={true} />
-        <div className="outlet-container">
+        <div
+          className={`outlet-container ${
+            globalState?.isSidebarOpen ? "-z-10" : ""
+          }`}
+        >
           <Outlet />
         </div>
       </div>

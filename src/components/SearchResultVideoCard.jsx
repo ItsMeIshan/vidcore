@@ -5,17 +5,17 @@ function SearchResultVideoCard(props) {
   const date = new Date(props?.snippet?.publishTime);
   return (
     <>
-      <div className="w-full">
+      <div className="w-full sm:w-4/5">
         <Link to={`/video/${props?.id?.videoId}`}>
           <div className="search-card-container">
-            <div className="mr-2 w-80 flex-grow">
+            <div className="mr-2 w-80 flex-grow sm:w-full thumbnail-container">
               <img
                 className="search-card-thumbnail"
                 src={props?.snippet?.thumbnails?.medium?.url}
                 alt="Thumbnail"
               />
             </div>
-            <div className="search-card-info">
+            <div className="search-card-info flex-shrink-[2]">
               <h3>{props?.snippet?.title}</h3>
               <span className="text-sm my-1">{date.toLocaleDateString()}</span>
               <div className="search-card-channel">
@@ -29,7 +29,9 @@ function SearchResultVideoCard(props) {
                 </div>
                 <span>{props?.snippet?.channelTitle}</span>
               </div>
-              <span className="text-sm">{props?.snippet?.description}</span>
+              <span className="text-sm search-result-card-description">
+                {props?.snippet?.description}
+              </span>
             </div>
           </div>
         </Link>
