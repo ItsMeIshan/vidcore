@@ -12,10 +12,9 @@ function ChannelInfo(props) {
             src={props?.snippet?.thumbnails?.default?.url}
             alt="channel thumbnail"
           />
-          {/* #606060 */}
-          <div className="p-2 flex flex-col">
+          <div className="m-2 flex flex-col sm:ml-4">
             <span className="text-xl font-medium">{props?.snippet?.title}</span>
-            <div className="channel-stats flex text-[#606060]">
+            <div className="channel-stats flex text-[#606060] sm:flex-col">
               <span>
                 {props?.snippet?.customUrl
                   ? `${props?.snippet?.customUrl}`

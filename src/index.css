@@ -16,6 +16,7 @@ h3 {
 
 /* OUTLET */
 .outlet-container {
+  width: 100%;
   max-width: 1500px;
   margin: 0 auto;
 }
@@ -146,30 +147,33 @@ h3 {
 
 /* Video Preview */
 .video-preview-container {
-  @apply max-w-7xl w-[100%] min-h-[90vh];
+  @apply min-h-[90vh];
 }
 .video-and-channel-info {
-  @apply w-[70%];
+  @apply w-[70%] lg:w-full;
 }
 .preview-video {
   @apply w-full min-h-[70vh];
 }
 .preview-suggested-videos-container {
-  @apply flex justify-between;
+  @apply flex justify-between lg:flex-col;
 }
 .suggested-videos-container {
-  @apply w-1/4;
+  @apply w-1/4 lg:w-full;
 }
 
 /* SUGGESTED VIDEO CARD */
 .suggested-video-card-container {
-  /* @apply  */
+  @apply flex items-center mr-4 mt-4 hover:bg-[#f2f2f2] p-2 rounded-lg;
   min-height: 20vh;
+}
+.suggested-card-info h4 {
+  @apply text-lg font-medium;
 }
 
 /* Video Info */
 .video-info-container {
-  @apply ml-3 mt-3 mb-3 flex justify-between items-center;
+  @apply ml-3 mt-3 mb-3 flex justify-between items-center sm:flex-col sm:items-start;
 }
 .title-views {
   @apply flex-grow-[2];
@@ -178,7 +182,7 @@ h3 {
   @apply text-sm text-[#606060];
 }
 .control-section {
-  @apply flex flex-grow-[1] justify-evenly items-center;
+  @apply flex flex-grow-[1] justify-evenly items-center sm:w-full sm:justify-around;
 }
 .control-btn {
   @apply flex flex-col items-center bg-[#f2f2f2] rounded-2xl p-2 hover:bg-[#dedede];

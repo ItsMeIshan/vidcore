@@ -4,6 +4,7 @@ import { changeSidebarState } from "../../utils/globalStateSlice";
 import { useParams } from "react-router-dom";
 import {
   getChannelInfoURL,
+  getRelatedVideoURL,
   getVideoInfoURL,
 } from "../../utils/utilityFunctions";
 import SuggestedVideoCard from "../SuggestedVideoCard";
@@ -11,6 +12,10 @@ import VideoInfo from "./video/VideoInfo";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@uidotdev/usehooks";
 import ChannelInfo from "./video/ChannelInfo";
+import {
+  addSuggestedVideosToList,
+  setNextSuggestedPageToken,
+} from "../../utils/videoSlice";
 
 const VideoPreview = () => {
   const [vidInfo, setVidInfo] = useState(null);
@@ -43,31 +48,32 @@ const VideoPreview = () => {
   useEffect(() => {
     dispatch(changeSidebarState(false));
     vidParams.id != undefined && suggestedVideoState?.nextPgToken == ""
-      ? fetchVideoInfo(vidParams?.id)
-      : // fetch(getRelatedVideoURL("", vidParams.id))
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //       dispatch(addSuggestedVideosToList(json?.items));
-        //       dispatch(setNextSuggestedPageToken(json.nextPageToken));
-        //       fetchVideoInfo(vidParams?.id);
-        //     })
-        console.log("NO API CALL");
+      ? fetch(getRelatedVideoURL("", vidParams.id))
+          .then((response) => response.json())
+          .then((json) => {
+            dispatch(addSuggestedVideosToList(json?.items));
+            dispatch(setNextSuggestedPageToken(json.nextPageToken));
+            fetchVideoInfo(vidParams?.id);
+          })
+      : console.log("NO API CALL");
   }, [vidParams?.id]);
 
   const { width, height } = useWindowSize();
   return (
-    <div className="video-preview-container">
+    <>
       {showConfetti ? <Confetti width={width} height={height} /> : ""}
       <div className="preview-suggested-videos-container">
         <div className="video-and-channel-info">
-          <iframe
-            className="preview-video"
-            src={`https://www.youtube.com/embed/${vidParams?.id}`}
-            title="YouTube video player"
-            // frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+          <div>
+            <iframe
+              className="preview-video"
+              src={`https://www.youtube.com/embed/${vidParams?.id}`}
+              title="YouTube video player"
+              // frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
           <div>
             <div>
               {vidInfo
@@ -97,7 +103,9 @@ const VideoPreview = () => {
           })}
         </div>
       </div>
-    </div>
+    </>
+    // <div className="video-preview-container">
+    // </div>
   );
 };
 

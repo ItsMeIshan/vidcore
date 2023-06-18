@@ -25,12 +25,12 @@ function VideoInfo(props) {
           </span>
         </div>
         <div className="control-section">
-          <div className=" like-dislike-btn">
+          <div title="Like" className=" like-dislike-btn">
             <a href="#" onClick={handleClick}>
               <HandThumbUpIcon className="h-6 w-6" />
             </a>
           </div>
-          <div className=" like-dislike-btn">
+          <div title="Dislike" className=" like-dislike-btn">
             <HandThumbDownIcon className="h-6 w-6" />
           </div>
           <div className="control-btn">

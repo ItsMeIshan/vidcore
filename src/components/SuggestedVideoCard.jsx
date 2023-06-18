@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 function SuggestedVideoCard(props) {
+  const dateStr = new Date(props?.snippet?.publishedAt);
   const dispatch = useDispatch();
   const selectedVideoState = useSelector(
     (store) => store.videoSlice.selectedVideoState
@@ -33,8 +34,20 @@ function SuggestedVideoCard(props) {
     <>
       <Link to={`/video/${props?.id?.videoId}`} onClick={handleClick}>
         <div className="suggested-video-card-container">
-          {props?.id?.videoId}
-          <img src={props?.snippet?.thumbnails?.default?.url} alt="thumbnail" />
+          <div className="mr-3">
+            <img
+              className="rounded-lg"
+              src={props?.snippet?.thumbnails?.default?.url}
+              alt="thumbnail"
+            />
+          </div>
+          <div className="suggested-card-info">
+            <h4>{props?.snippet?.title}</h4>
+            <div className="flex flex-col text-[#606060] text-sm">
+              <span>{props?.snippet?.channelTitle}</span>
+              <span>{dateStr.toLocaleDateString()}</span>
+            </div>
+          </div>
         </div>
       </Link>
     </>
