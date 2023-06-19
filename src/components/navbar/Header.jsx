@@ -8,7 +8,7 @@ import UserComponent from "./UserComponent";
 import { changeSidebarState } from "../../utils/globalStateSlice";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ insideError = false }) => {
   const sidebarState = useSelector((store) => store?.globalSlice?.globalState);
   const dispatch = useDispatch();
   const setSidebarState = (e) => {
@@ -17,7 +17,7 @@ const Header = () => {
   };
   return (
     <nav className="header sticky top-0 z-20 bg-white">
-      {!sidebarState?.mobileSearchBar ? (
+      {!sidebarState?.mobileSearchBar && !insideError ? (
         <a href="" onClick={(e) => setSidebarState(e)}>
           <img src={menuIcon} alt="menu-icon" height={"22px"} width={"22px"} />
         </a>

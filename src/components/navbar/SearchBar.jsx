@@ -1,19 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SEARCH_SUGGESTIONS_URL, searchIcon } from "../../utils/constants";
-import {
-  addSearchResults,
-  clearSuggestions,
-  setSearchString,
-} from "../../utils/videoSlice";
-import SearchResults from "./SearchResults";
-import { useCustomDebounce } from "../../utils/debounce";
-import { useState } from "react";
+import { clearSuggestions, setSearchString } from "../../utils/videoSlice";
 import { Link } from "react-router-dom";
 import { changeMobileSearchBarState } from "../../utils/globalStateSlice";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { searchIcon } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const [focus, setFocus] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const searchVideoState = useSelector(
     (store) => store.videoSlice.searchVideoState
@@ -23,23 +17,19 @@ const SearchBar = () => {
     e.preventDefault();
     dispatch(changeMobileSearchBarState(true));
   };
-  const getData = (e) => {
-    fetch(`${SEARCH_SUGGESTIONS_URL}${e}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        console.log(json);
-        dispatch(addSearchResults(json[1]));
-      })
-      .catch((err) => console.log(err));
-  };
-  useCustomDebounce(getData, 300);
+
   const setSearchQuery = (e) => {
     if (e.target.value === "") {
       dispatch(clearSuggestions());
     }
     dispatch(setSearchString(e.target.value));
+  };
+  const handleSubmit = (e) => {
+    if (e.key === "Enter" && searchVideoState?.searchString != "") {
+      navigate(
+        `/search?q=${searchVideoState?.searchString.replaceAll(" ", "+")}`
+      );
+    }
   };
 
   return (
@@ -54,15 +44,7 @@ const SearchBar = () => {
             id=""
             value={searchVideoState.searchString}
             onChange={setSearchQuery}
-            onFocus={(e) => {
-              console.log(e);
-              setFocus(true);
-            }}
-            onBlur={() => {
-              setTimeout(() => {
-                setFocus(false);
-              }, 100);
-            }}
+            onKeyUp={handleSubmit}
           />
           {searchVideoState?.searchString == "" ? (
             <div className="search-btn search-btn-disabled">
@@ -97,15 +79,6 @@ const SearchBar = () => {
               id=""
               value={searchVideoState.searchString}
               onChange={setSearchQuery}
-              onFocus={(e) => {
-                console.log(e);
-                setFocus(true);
-              }}
-              onBlur={() => {
-                setTimeout(() => {
-                  setFocus(false);
-                }, 100);
-              }}
             />
             {searchVideoState?.searchString == "" ? (
               <div className="search-btn search-btn-disabled">
@@ -127,7 +100,6 @@ const SearchBar = () => {
         ) : (
           ""
         )}
-        <SearchResults focus={focus} />
       </div>
       {!globalState.mobileSearchBar ? (
         <div className="searchbar-mobile-btn">

@@ -14,7 +14,7 @@ export const POPULAR_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3
 export const SUGGESTED_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&key=${API_KEY}`;
 export const VIDEO_INFO_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=${API_KEY}`;
 export const CHANNEL_INFO_API_URL = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=${API_KEY}`;
-export const SEARCH_SUGGESTIONS_URL = `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=`;
+export const SEARCH_SUGGESTIONS_URL = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=`;
 export const SEARCH_URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=${API_KEY}`;
 export const micIcon = "/mic-icon-white.svg";
 export const newVideo = "/reel-icon.svg";

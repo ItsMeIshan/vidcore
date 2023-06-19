@@ -7,17 +7,19 @@ import {
   getRelatedVideoURL,
   getVideoInfoURL,
 } from "../../utils/utilityFunctions";
-import SuggestedVideoCard from "../SuggestedVideoCard";
+import SuggestedVideoCard from "../cards/SuggestedVideoCard";
 import VideoInfo from "./video/VideoInfo";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@uidotdev/usehooks";
 import ChannelInfo from "./video/ChannelInfo";
 import {
   addSuggestedVideosToList,
-  setNextSuggestedPageToken,
+  resetVideoData,
 } from "../../utils/videoSlice";
+import { searchResultShimmerCards } from "../shimmer/ShimmerRelatedVideoCards";
 
 const VideoPreview = () => {
+  const [error, setError] = useState(false);
   const [vidInfo, setVidInfo] = useState(null);
   const [channelInfo, setChannelInfo] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -28,37 +30,78 @@ const VideoPreview = () => {
   const dispatch = useDispatch();
   const fetchVideoInfo = (id) => {
     fetch(getVideoInfoURL(id))
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == 200) {
+          setError(false);
+          return response.json();
+        } else {
+          setError(true);
+        }
+      })
       .then((json) => {
-        console.log(json);
         const old = structuredClone(vidInfo);
         setVidInfo({ ...old, ...json });
         fetchChannelInfo(json?.items[0]?.snippet?.channelId);
+      })
+      .catch(() => {
+        setError(true);
       });
   };
   const fetchChannelInfo = (id) => {
     fetch(getChannelInfoURL(id))
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == 200) {
+          setError(false);
+          return response.json();
+        } else {
+          setError(true);
+        }
+      })
       .then((json) => {
-        console.log(json);
         const old = structuredClone(channelInfo);
         setChannelInfo({ ...old, ...json });
+      })
+      .catch(() => {
+        setError(true);
       });
   };
   useEffect(() => {
     dispatch(changeSidebarState(false));
     vidParams.id != undefined && suggestedVideoState?.nextPgToken == ""
       ? fetch(getRelatedVideoURL("", vidParams.id))
-          .then((response) => response.json())
+          .then((response) => {
+            if (response.status == 200) {
+              setError(false);
+              return response.json();
+            } else {
+              setError(true);
+            }
+          })
           .then((json) => {
             dispatch(addSuggestedVideosToList(json?.items));
-            dispatch(setNextSuggestedPageToken(json.nextPageToken));
             fetchVideoInfo(vidParams?.id);
           })
-      : console.log("NO API CALL");
+          .catch(() => {
+            setError(true);
+          })
+      : "";
+    return () => {
+      dispatch(resetVideoData());
+    };
   }, [vidParams?.id]);
 
   const { width, height } = useWindowSize();
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center">
+        <img src="/youtube-offline.png" alt="decoration image" />
+        <h1 className="text-4xl md:text-xl my-4">Something went wrong....</h1>
+        <h3>We are working on fixing the problem.</h3>
+        <h3>Please Try again later.</h3>
+      </div>
+    );
+  }
   return (
     <>
       {showConfetti ? <Confetti width={width} height={height} /> : ""}
@@ -86,7 +129,7 @@ const VideoPreview = () => {
                       />
                     );
                   })
-                : console.log("NOTHING HAPPENED")}
+                : ""}
             </div>
             <div className="about-channel">
               {channelInfo
@@ -97,15 +140,21 @@ const VideoPreview = () => {
             </div>
           </div>
         </div>
-        <div className="suggested-videos-container">
-          {suggestedVideoState?.suggestedVideoList?.map((item, idx) => {
-            return <SuggestedVideoCard key={idx} {...item} />;
-          })}
-        </div>
+        {suggestedVideoState?.suggestedVideoList?.length == 0 ? (
+          <div className="suggested-videos-container">
+            {searchResultShimmerCards?.map((item) => {
+              return item;
+            })}
+          </div>
+        ) : (
+          <div className="suggested-videos-container">
+            {suggestedVideoState?.suggestedVideoList?.map((item, idx) => {
+              return <SuggestedVideoCard key={idx} {...item} />;
+            })}
+          </div>
+        )}
       </div>
     </>
-    // <div className="video-preview-container">
-    // </div>
   );
 };
 

@@ -3,7 +3,7 @@ import {
   resetVideoData,
   setCurrentVid,
   setPreviousVid,
-} from "../utils/videoSlice";
+} from "../../utils/videoSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function SuggestedVideoCard(props) {
@@ -34,8 +34,9 @@ function SuggestedVideoCard(props) {
     <>
       <Link to={`/video/${props?.id?.videoId}`} onClick={handleClick}>
         <div className="suggested-video-card-container">
-          <div className="mr-3">
+          <div className="mr-3 w-1/3">
             <img
+              width="100%"
               className="rounded-lg"
               src={props?.snippet?.thumbnails?.default?.url}
               alt="thumbnail"

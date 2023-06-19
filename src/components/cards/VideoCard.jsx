@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { userIcon } from "../utils/constants";
+import { userIcon } from "../../utils/constants";
 import {
   numberCountFormat,
   youtubeDurationToUseful,
-} from "../utils/utilityFunctions";
+} from "../../utils/utilityFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetVideoData,
   setCurrentVid,
   setPreviousVid,
-} from "../utils/videoSlice";
+} from "../../utils/videoSlice";
 
 const VideoCard = (props) => {
   let dateStr = new Date(props?.snippet?.publishedAt);

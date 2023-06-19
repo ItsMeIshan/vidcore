@@ -3,6 +3,7 @@ import App from "../components/App";
 import VideoPreview from "../components/body/VideoPreview";
 import MainBody from "../components/body/MainBody";
 import SearchPreview from "../components/body/SearchPreview";
+import ErrorComponent from "../components/error";
 
 const appRouter = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const appRouter = createBrowserRouter([
         element: <SearchPreview />,
       },
     ],
+    errorElement: <ErrorComponent />,
   },
 ]);
 export default appRouter;

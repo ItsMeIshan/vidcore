@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { userIcon } from "../utils/constants";
+import { userIcon } from "../../utils/constants";
 
 function SearchResultVideoCard(props) {
   const date = new Date(props?.snippet?.publishTime);

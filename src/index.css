@@ -107,7 +107,7 @@ h3 {
   @apply bg-[#f1f1f1] rounded-lg z-10 pt-1 w-[100%] sm:bg-transparent;
 }
 .popular-videos-container {
-  @apply flex flex-wrap min-h-screen justify-center;
+  @apply flex flex-wrap 2xl:min-h-screen justify-center;
 }
 
 /* Video Card */
@@ -153,7 +153,7 @@ h3 {
   @apply w-[70%] lg:w-full;
 }
 .preview-video {
-  @apply w-full min-h-[70vh];
+  @apply w-full min-h-[70vh] sm:min-h-[50vh] max-h-[720px];
 }
 .preview-suggested-videos-container {
   @apply flex justify-between lg:flex-col;
@@ -165,10 +165,14 @@ h3 {
 /* SUGGESTED VIDEO CARD */
 .suggested-video-card-container {
   @apply flex items-center mr-4 mt-4 hover:bg-[#f2f2f2] p-2 rounded-lg;
-  min-height: 20vh;
+  min-height: 100px;
+}
+.suggested-card-info {
+  @apply w-2/3;
 }
 .suggested-card-info h4 {
-  @apply text-lg font-medium;
+  @apply text-base font-medium w-full;
+  text-overflow: ellipsis;
 }
 
 /* Video Info */
@@ -228,7 +232,7 @@ h3 {
   @apply max-w-5xl flex flex-col items-center;
 }
 .search-card-container {
-  @apply flex justify-evenly items-center min-h-[30vh] mb-4 hover:bg-[#f2f2f2] sm:flex-col sm:items-center;
+  @apply flex justify-evenly items-center min-h-[200px] mb-4 hover:bg-[#f2f2f2] sm:flex-col sm:items-center;
 }
 .search-card-info {
   @apply flex flex-col text-[#606060];
@@ -248,6 +252,11 @@ h3 {
 .thumbnail-container {
   @apply sm:flex sm:justify-center;
 }
+
+/* SHIMMER UI */
+/* .popular-video-shimmer {
+  @apply 
+} */
 
 /* MEDIA QUERIES */
 @media (min-width: 639px) {
