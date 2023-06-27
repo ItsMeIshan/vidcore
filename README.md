@@ -63,8 +63,9 @@ Here is the detailed explaination of navigating in the `components` folder.
 - I've tried to follow the best practices for a frontend application and my react learnings to create beautiful and performant user interfaces.
 
 ## If I had more time I would change this
-- setup continuous integration to run tests and ESLint checks on every pull requests.
 - add Live video watching functionality and live chat features, along with the authentication.
+- Cache the search results
+- setup continuous integration to run tests and ESLint checks on every pull requests.
 - Add end to end tests.
 
 ## Available Scripts
