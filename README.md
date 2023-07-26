@@ -4,6 +4,7 @@
 My goal was to build a Video library web app and use best practices and put my React learnings for building this project.
 
 - Took design inspiration from dribble here are the [design credits](https://dribbble.com/Rezanmdesign/about)
+- Designed a Custom logo for the project in Figma
 - Went through the project planning phase by breaking project into different components & views, choosing project tooling with vite as a project bundler, TailwindCSS for styling, Redux for state management.
 - Used Youtube API V3 for getting video data, the Home page shows popular videos of US region, each video goes to a Video preview page.
 
